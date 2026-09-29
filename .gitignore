@@ -36,3 +36,5 @@ coverage/
 
 # Copilot/automation artifacts
 .agents/
+*.tsbuildinfo
+

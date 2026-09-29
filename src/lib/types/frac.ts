@@ -52,6 +52,7 @@ export type GapSeverity = "CRITICAL" | "MODERATE" | "PROFICIENT" | "SURPLUS";
 export interface SkillGap {
   competencyId: string;
   competencyName: string;
+  description?: string;
   domain: CompetencyDomain;
   assessedLevel: number;
   benchmarkLevel: number;

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
@@ -22,7 +22,7 @@ interface SidebarProps {
   currentUserId?: string;
 }
 
-export function Sidebar({ currentUserId }: SidebarProps) {
+function SidebarContent({ currentUserId }: SidebarProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const userId = currentUserId || searchParams?.get("user") || "usr-jso-rajesh";
@@ -187,5 +187,13 @@ export function Sidebar({ currentUserId }: SidebarProps) {
         <p className="text-[10px]">Karmayogi Statistical Extension</p>
       </div>
     </aside>
+  );
+}
+
+export function Sidebar(props: SidebarProps) {
+  return (
+    <Suspense fallback={<aside className="w-64 shrink-0 bg-white border-r border-[#C7C2BA]/60 min-h-screen p-4" />}>
+      <SidebarContent {...props} />
+    </Suspense>
   );
 }

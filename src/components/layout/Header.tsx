@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -73,7 +73,7 @@ const capsuleNavLinks = [
   },
 ];
 
-export function Header({
+function HeaderContent({
   activeUserId,
   onUserChange,
 }: {
@@ -287,5 +287,16 @@ export function Header({
         </div>
       </header>
     </div>
+  );
+}
+
+export function Header(props: {
+  activeUserId?: string;
+  onUserChange?: (userId: string) => void;
+}) {
+  return (
+    <Suspense fallback={<div className="w-full bg-white z-40 relative min-h-[60px]" />}>
+      <HeaderContent {...props} />
+    </Suspense>
   );
 }
